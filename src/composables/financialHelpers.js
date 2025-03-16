@@ -11,10 +11,10 @@ export function useFinancialHelpers () {
         ((-1 + presentValueInterstFector) * (1 + annualRate * (type)))
   }
 
-  const toCurrencyString = (value) => {
+  const toCurrencyString = (value, currency = 'USD') => {
     return Math.floor(Number(value)).toLocaleString('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: currency,
       maximumFractionDigits: 0,
     })
   }

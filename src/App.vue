@@ -1,5 +1,5 @@
 <script setup>
-import loanCalulator from './components/loanCalulator.vue'
+import loanCalculator from './components/loanCalculator.vue'
 
 defineOptions({
   name: 'App',
@@ -7,7 +7,7 @@ defineOptions({
 </script>
 
 <template>
-  <loanCalulator />
+  <loanCalculator />
 </template>
 
 <style>

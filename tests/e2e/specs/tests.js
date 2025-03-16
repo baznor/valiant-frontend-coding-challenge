@@ -9,50 +9,50 @@ describe('Example test', () => {
 
     // input is formatted into currency value
     cy.get('[data-cy="loan-amount"]').type('{selectall}1000')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$1,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$1,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}10000')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$10,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$10,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}100000')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$100,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$100,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}1000000')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$1,000,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$1,000,000')
 
-    // non-numeric characters are removed
+    // // non-numeric characters are removed
     cy.get('[data-cy="loan-amount"]').type('{selectall}1000abcdefg')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$1,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$1,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}abcdefg')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$0')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$0')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}abcdefg100')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$100')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$100')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}$&@@%@&@**#')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$0')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$0')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}-1000')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$1,000')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$1,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}1,00')
-    cy.get('[data-cy="loan-amount"]').should('have.value', '$100')
+    cy.get('[data-cy="loan-amount"]>input').should('have.value', '$100')
   })
 
   it('loan amount input limits', () => {
     cy.visit('http://localhost:5173/')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}100')
-    cy.get('[data-cy="error-text"]').should('exist')
-    cy.get('[data-cy="error-text"]').contains('$1,000')
+    cy.get('[data-cy="loan-amount"] .errorText').should('exist')
+    cy.get('[data-cy="loan-amount"] .errorText').contains('$1,000')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}1000')
-    cy.get('[data-cy="error-text"]').should('not.exist')
+    cy.get('[data-cy="loan-amount"] .errorText').should('not.exist')
 
     cy.get('[data-cy="loan-amount"]').type('{selectall}90000000')
-    cy.get('[data-cy="error-text"]').should('exist')
-    cy.get('[data-cy="error-text"]').contains('$20,000,000')
+    cy.get('[data-cy="loan-amount"] .errorText').should('exist')
+    cy.get('[data-cy="loan-amount"] .errorText').contains('$20,000,000')
   })
 
   it('loan purpose options', () => {
@@ -158,7 +158,7 @@ describe('Example test', () => {
     cy.get('[data-cy="loan-total-repayment"]').contains('$467,766 Total')
   })
 
-  it.only('mobile test', () => {
+  it('mobile test', () => {
     cy.viewport('iphone-6')
     cy.visit('http://localhost:5173/')
 
@@ -169,6 +169,11 @@ describe('Example test', () => {
     cy.get('[data-cy="loan-repayment"]').should('be.visible')
     cy.get('[data-cy="loan-total-repayment"]').should('be.visible')
 
-    // TODO: are there scroll bars
+    // No horizontal scrollbar
+    cy.window().then(win => {
+      const htmlWidth = Cypress.$('html')[0].scrollWidth
+      const scrollBarWidth = win.innerWidth - htmlWidth
+      expect(scrollBarWidth).to.be.equal(0)
+    })
   })
 })

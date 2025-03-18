@@ -1,5 +1,8 @@
 <template>
-  <select v-model="model">
+  <select
+    v-model="model"
+    class="min-w-[100px] rounded-none border-b-2 border-dashed border-current bg-transparent px-2 py-0.5 text-center outline-none"
+  >
     <template
       v-for="item in items"
       :key="item[props.itemValue]"
@@ -12,7 +15,7 @@
 </template>
 
 <script setup>
-const model = defineModel()
+const model = defineModel({ type: String })
 const props = defineProps({
   items: {
     required: false,
@@ -36,17 +39,3 @@ const props = defineProps({
   },
 })
 </script>
-
-<style scoped>
-
-  select {
-    background: none;
-    appearance: none;
-    -webkit-appearance: none;
-    border-bottom: 2px dashed;
-    border-radius: 0px;
-    padding: 2px 8px;
-    text-align: center;
-    min-width: 100px;
-  }
-</style>

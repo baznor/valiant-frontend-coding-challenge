@@ -51,9 +51,12 @@ TODO: Quick scratch breakdown of your to-dos, how you broke up the different tas
   - inherit colors
   - make it customizable so it can be used elsewhere
 - [X] cypress test for mobile should make sure there it no scroll bars
-- [ ] Put port in env var
-- [ ] fix all eslint warnings
+- [X] fix all eslint warnings
   - only tailwind related issues left
 - [X] add vitest back in
-- [ ] make sure it can be localized - vue-i18n
-- [ ] don't like that selects look different in each browser and they're all pretty bad
+
+
+## Third pass - feedback
+- [X] convert all CSS to tailwind
+- [X] fix total repayments error
+- [X] fix all eslint warnings

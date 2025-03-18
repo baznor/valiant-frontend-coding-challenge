@@ -1,17 +1,17 @@
 <template>
-  <div class="currencyInput">
+  <div class="relative">
     <input
       v-model="inputCache"
       type="text"
-      class="mx-2 px-2"
-      :class="{ error: error != null }"
+      class="relative mx-2 border-b-2 border-dashed border-current bg-transparent px-2 py-0.5 text-center outline-none"
+      :class="{ 'border-error text-error': error != null }"
       :min="props.min"
       :max="props.max"
       :style="maxWidth ? `max-width: ${props.maxWidth}px` : ''"
     >
     <div
       v-if="error"
-      class="errorText"
+      class="absolute -bottom-4 left-0 w-full text-center text-xs leading-3 text-error"
     >
       {{ error }}
     </div>
@@ -76,37 +76,3 @@ const error = computed(() => {
 })
 
 </script>
-
-<style scoped>
-  .currencyInput {
-    position: relative;
-
-    input {
-      text-align: center;
-      border-bottom: 2px dashed;
-      padding: 2px 8px;
-      background: none;
-      position: relative;
-    }
-
-    input.error {
-      color: #ef5350 !important;
-      border-color: #ef5350 !important;
-    }
-
-    textarea:focus, input:focus{
-      outline: none;
-    }
-
-    .errorText {
-      color: #ef5350;
-      position: absolute;
-      font-size: 12px;
-      line-height: 12px;
-      bottom: -16px;
-      left: 0px;
-      text-align: center;
-      width: 100%;
-    }
-  }
-</style>

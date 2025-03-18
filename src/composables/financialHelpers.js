@@ -14,7 +14,7 @@ export function useFinancialHelpers () {
   const toCurrencyString = (value, currency = 'USD') => {
     return Math.floor(Number(value)).toLocaleString('en-US', {
       style: 'currency',
-      currency: currency,
+      currency,
       maximumFractionDigits: 0,
     })
   }

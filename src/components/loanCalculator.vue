@@ -1,11 +1,9 @@
 <template>
   <div
-    class="flex flex-col items-center text-2xl font-semibold"
-    style="row-gap: 16px;"
+    class="flex flex-col items-center gap-y-4 text-2xl font-semibold"
   >
     <div
-      class="flex grow flex-row flex-wrap items-center justify-center"
-      style="row-gap: 16px;"
+      class="flex grow flex-row flex-wrap items-center justify-center gap-y-4"
     >
       <div>I need</div>
       <inputCurrency
@@ -42,7 +40,7 @@
         data-cy="loan-term"
       />
     </div>
-    <hr>
+    <hr class="w-full border-b border-solid">
     <div
       class="text-primary"
       data-cy="loan-repayment"
@@ -110,15 +108,7 @@ const totalRepayment = computed(() => {
   if (isLoading.value) {
     return '$0'
   }
-  return toCurrencyString(Math.floor(repayments.value) * termSelected.value)
+  return toCurrencyString(Math.floor(repayments.value) * termSelected.value * (periodSelected.value / 12))
 })
 
 </script>
-
-<style scoped>
-  hr {
-    width: 100%;
-    border-bottom: 2px solid;
-    opacity: 0.05;
-  }
-</style>
